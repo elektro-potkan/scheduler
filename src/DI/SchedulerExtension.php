@@ -4,10 +4,6 @@ namespace Contributte\Scheduler\DI;
 
 use Contributte\DI\Helper\ExtensionDefinitionsHelper;
 use Contributte\Scheduler\CallbackJob;
-use Contributte\Scheduler\Command\ForceRunCommand;
-use Contributte\Scheduler\Command\HelpCommand;
-use Contributte\Scheduler\Command\ListCommand;
-use Contributte\Scheduler\Command\RunCommand;
 use Contributte\Scheduler\IScheduler;
 use Contributte\Scheduler\LockingScheduler;
 use Contributte\Scheduler\Scheduler;
@@ -49,20 +45,6 @@ class SchedulerExtension extends CompilerExtension
 		} else {
 			$schedulerDefinition->setFactory(Scheduler::class);
 		}
-
-		// Commands
-		$builder->addDefinition($this->prefix('runCommand'))
-			->setFactory(RunCommand::class)
-			->setAutowired(false);
-		$builder->addDefinition($this->prefix('forceRunCommand'))
-			->setFactory(ForceRunCommand::class)
-			->setAutowired(false);
-		$builder->addDefinition($this->prefix('listCommand'))
-			->setFactory(ListCommand::class)
-			->setAutowired(false);
-		$builder->addDefinition($this->prefix('helpCommand'))
-			->setFactory(HelpCommand::class)
-			->setAutowired(false);
 
 		// Jobs
 		foreach ($config->jobs as $jobName => $jobConfig) {
